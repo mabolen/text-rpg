@@ -12,8 +12,6 @@ function App() {
   const [intel, setInt] = useState(10)
   const [stam, setStam] = useState(10)
   const [points, setPoints] = useState(10)
-  const [wep, setWep] = useState('')
-  const [armor, setArmor] = useState('')
   const [createChar, setCreateChar] = useState(true)
   const [health, setHealth] = useState(stam * 5)
 
@@ -63,8 +61,11 @@ function App() {
       name: 'Sword',
       damage: (dice(6) * 2) + strDamageBonus //2d6 + strength bonus
     },
-    armor: '',
-    item: ''
+    armor: {
+      name: 'Leather',
+      ac: 12
+    },
+    item: 'Red Potion'
   }
   //handle setting Name
   let currentName = ''
@@ -75,51 +76,41 @@ function App() {
 
   return (
     <div className="container-fluid" id='main'>
-      <div className='row' id='top-bar'>
-        <div className='top-bar'>
-          {createName ? <form><input id='name-input' type="text" onChange={event => {currentName = event.target.value}}></input><button onClick={()=> submitName()}>Submit Name</button></form>: null}
-          {!createName ? <div className='top-item'>Name: {name}</div>: null}
-          <div className='top-item'>HP: {health}</div>
-          <div className='top-item'>AC: </div>
-        </div>
-
+      <div id='char-sheet' className="char-sheet">
+        {points === 0 && createChar ? <button onClick={() => setCreateChar(false)}>Finalize Stats?</button> : null}
+        <ul className='stats'> Stats:
+          {createChar ? <div>Stat Points Remaining: {points}</div> : null}
+          <li className='stat'>Strength: {str} 
+          {(str < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incStr()}>+</button> : null}
+          {(str > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decStr()}>-</button> : null}
+          </li>
+          <li className='stat'>Dexterity: {dex}
+          {(dex < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incDex()}>+</button> : null}
+          {(dex > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decDex()}>-</button> : null}
+          </li>
+          <li className='stat'>Intelligence: {intel}
+          {(intel < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incInt()}>+</button> : null}
+          {(intel > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decInt()}>-</button> : null}
+          </li>
+          <li className='stat'>Stamina: {stam}
+          {(stam < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incStam()}>+</button> : null}
+          {(stam > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decStam()}>-</button> : null}
+          </li>
+        </ul>
+        <ul className='inventory'> Inventory:
+          <li className='eq'>Weapon: {equipment.weapon.name}</li>
+          <li className='eq'>Armor: {equipment.armor.name}</li>
+          <li className='eq'>Item: {equipment.item}</li>
+        </ul>
       </div>
-      <div className='row'>
-        <div id='char-sheet' className="char-sheet">
-          {points === 0 && createChar ? <button onClick={() => setCreateChar(false)}>Finalize Stats?</button> : null}
-          <div className='char-sheet-title'>
-            Character Sheet
-            {createChar ? <div>Points: {points}</div> : null}
-          </div>
-          <ul className='stats'> Stats:
-            <li className='stat'>Strength: {str} 
-            {(str < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incStr()}>+</button> : null}
-            {(str > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decStr()}>-</button> : null}
-            </li>
-            <li className='stat'>Dexterity: {dex}
-            {(dex < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incDex()}>+</button> : null}
-            {(dex > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decDex()}>-</button> : null}
-            </li>
-            <li className='stat'>Intelligence: {intel}
-            {(intel < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incInt()}>+</button> : null}
-            {(intel > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decInt()}>-</button> : null}
-            </li>
-            <li className='stat'>Stamina: {stam}
-            {(stam < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incStam()}>+</button> : null}
-            {(stam > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decStam()}>-</button> : null}
-            </li>
-          </ul>
-          <ul className='eq-list'> Equipment
-            <li className='eq'>Weapon: {equipment.weapon.name}</li>
-            <li className='eq'>Armor: {equipment.armor}</li>
-            <li className='eq'>Item: {equipment.item}</li>
-          </ul>
-        </div>
-          <Display  />
-        </div>
-        <div className='row'>
-          <Actions />
-        </div>
+      <div className='top-bar'>
+        {createName ? <form><input id='name-input' type="text" onChange={event => {currentName = event.target.value}}></input><button onClick={()=> submitName()}>Choose Name</button></form>: null}
+        {!createName ? <div className='top-item'>Name: {name}</div>: null}
+        <div className='top-item'>HP: {health}</div>
+        <div className='top-item'>AC: {equipment.armor.ac}</div>
+      </div>
+      <Display  />
+      <Actions />
     </div>
   );
 }

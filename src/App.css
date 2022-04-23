@@ -1,3 +1,10 @@
+:root {
+  --main-dark: #233142;
+  --main-light: #e3e3e3;
+  --main-blue: #455d7a;
+  --main-red: #f95959;
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -5,27 +12,27 @@
 }
 
 #main {
-  margin: 0;
-  padding: 0;
+  background-color: var(--main-dark);
 }
 
 .char-sheet {
   position: fixed;
+  margin-left: 0;
+  margin-top: 0;
   display: flex;
   flex-direction: column;
-  background-color: gray;
   justify-content: center;
   text-align: center;
-  height: 80vh;
+  height: 100vh;
   width: 20vw;
-  padding: 0;
 }
 
 .stats {
-  background-color: white;
-  padding: 0;
-  margin: 0;
+  background-color: var(--main-light);
   width: 20vw;
+  border: 1px solid black;
+  border-collapse: collapse;
+
 }
 
 .stat {
@@ -40,64 +47,78 @@
   vertical-align: middle;
 }
 
-.eq-list {
-  background-color: lightgreen;
+.inventory {
+  background-color: var(--main-light);
   padding: 0;
   margin: 0;
+  border: 1px solid black;
 }
 
-#display {
+.display {
   position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 0;
   margin-left: 20vw;
   height: 80vh;
-  background-color: aquamarine;
+  background-color: var(--main-red);
   width: 80vw;
+  border-radius: 10px;
+}
+
+.text-display {
+  width: 40vw;
+  height: 40vh;
+  background-color: var(--main-dark);
+  color: var(--main-light);
+  padding: 10px;
 }
 
 .top-bar {
+  position: relative;
+  margin-left: 40vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 10vh;
   width: 40vw;
   min-width: 320px;
-  margin: 0 auto;
-  background-color: yellow;
+  background-color: var(--main-dark);
   text-align: center;
 }
 
 .top-item {
   width: 200px;
   height: 30px;
-  background-color: white;
+  background-color: var(--main-light);
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0 0 5px;
 }
 
 .action-bar {
+  margin-left: 40vw;
   display: flex;
   justify-content: space-around;
   align-items: center;
   height: 10vh;
-  background-color: yellow;
+  background-color: var(--main-dark);
   width: 40vw;
   min-width: 320px;
-  margin: 0 auto;
 }
 
 .action {
   height: 30px;
   min-width: 70px;
-  background-color: white;
+  background-color: var(--main-light);
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0 0 5px;
 }
 
 .action:hover {
-  border: 2px solid white;
+  border: 2px solid var(--main-light);
 }
 
 
