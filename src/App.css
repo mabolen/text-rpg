@@ -1,0 +1,103 @@
+* {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+#main {
+  margin: 0;
+  padding: 0;
+}
+
+.char-sheet {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background-color: gray;
+  justify-content: center;
+  text-align: center;
+  height: 80vh;
+  width: 20vw;
+  padding: 0;
+}
+
+.stats {
+  background-color: white;
+  padding: 0;
+  margin: 0;
+  width: 20vw;
+}
+
+.stat {
+  border: 1px solid black;
+  min-height: 50px;
+}
+
+.stat-btn {
+  width: 1rem;
+  height: 1.8rem;
+  margin: 5px;
+  vertical-align: middle;
+}
+
+.eq-list {
+  background-color: lightgreen;
+  padding: 0;
+  margin: 0;
+}
+
+#display {
+  position: relative;
+  padding: 0;
+  margin-left: 20vw;
+  height: 80vh;
+  background-color: aquamarine;
+  width: 80vw;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
+  width: 40vw;
+  min-width: 320px;
+  margin: 0 auto;
+  background-color: yellow;
+  text-align: center;
+}
+
+.top-item {
+  width: 200px;
+  height: 30px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px;
+}
+
+.action-bar {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 10vh;
+  background-color: yellow;
+  width: 40vw;
+  min-width: 320px;
+  margin: 0 auto;
+}
+
+.action {
+  height: 30px;
+  min-width: 70px;
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 0 0 5px;
+}
+
+.action:hover {
+  border: 2px solid white;
+}
+
+
