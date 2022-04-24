@@ -1,6 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
 import rooms from './Rooms'
+import npcs from './Npcs'
 
 const Display = (props) => {
 
@@ -12,6 +13,12 @@ const Display = (props) => {
   }
 
   const currentRoom = rooms[zone][room]
+  const currentNpcs = currentRoom.npcs
+  const npc = npcs[currentNpcs].description
+
+  console.log(currentNpcs)
+  console.log(npc)
+  console.log(npcs[currentNpcs].description)
 
   const directionCheck = {
     west: currentRoom.exits.west ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.west)}>West</div> : null,
@@ -25,10 +32,12 @@ const Display = (props) => {
   return (
     <div id='display' className="display">
       <div className='text-display'>
-      {currentRoom.description}
+        {currentRoom.description}
+        <div className='npcs'>
+          {currentNpcs ? <div className='npc'>{npc}</div> : null}
+        </div>
         <div className='exit-title'>Exits:</div>
         <div className='exits'>
-        
           {directionCheck.west}{directionCheck.east}{directionCheck.north}{directionCheck.south}{directionCheck.up}{directionCheck.down}
         </div>
       </div>

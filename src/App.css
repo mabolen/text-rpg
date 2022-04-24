@@ -139,8 +139,15 @@
   border: 1px solid var(--main-light);
   width: 60px;
   border-radius: 5px;
+  box-shadow: 1px 1px 5px black;
 }
 .exit:hover {
   background-color: var(--main-red);
   cursor: pointer;
+}
+
+.npcs {
+  text-align: center;
+  padding: 10px;
+  text-shadow: #f95959;
 }

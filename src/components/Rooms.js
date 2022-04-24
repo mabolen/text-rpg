@@ -8,7 +8,7 @@ const rooms = {
                 north: 'bar',
                 south: 'street'
             },
-            npcs: ''
+            npcs: 'shadow'
         },
         'alley': {
             description: 'A stinky alleyway.',
