@@ -115,10 +115,32 @@
   border: 1px solid black;
   border-radius: 5px;
   box-shadow: 0 0 5px;
+  margin: 5px;
 }
 
 .action:hover {
   border: 2px solid var(--main-light);
+  cursor: pointer;
 }
 
+.exit-title {
+  text-align: center;
+}
 
+.exits {
+  display: flex;
+  justify-content: space-evenly;
+  text-align: center;
+  padding: 10px;
+}
+
+.exit {
+  background-color: var(--main-blue);
+  border: 1px solid var(--main-light);
+  width: 60px;
+  border-radius: 5px;
+}
+.exit:hover {
+  background-color: var(--main-red);
+  cursor: pointer;
+}

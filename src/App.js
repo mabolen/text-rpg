@@ -14,6 +14,7 @@ function App() {
   const [points, setPoints] = useState(10)
   const [createChar, setCreateChar] = useState(true)
   const [health, setHealth] = useState(stam * 5)
+  const [room, setRoom] = useState('town square')
 
   const buttonFuncs = {
     incStr: function(){
@@ -79,7 +80,7 @@ function App() {
       <div id='char-sheet' className="char-sheet">
         {points === 0 && createChar ? <button onClick={() => setCreateChar(false)}>Finalize Stats?</button> : null}
         <ul className='stats'> Stats:
-          {createChar ? <div>Stat Points Remaining: {points}</div> : null}
+          {createChar ? <div>Points Remaining: {points}</div> : null}
           <li className='stat'>Strength: {str} 
           {(str < 20 && points > 0 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.incStr()}>+</button> : null}
           {(str > 10 && createChar) ? <button className='stat-btn' onClick={()=> buttonFuncs.decStr()}>-</button> : null}
@@ -109,11 +110,18 @@ function App() {
         <div className='top-item'>HP: {health}</div>
         <div className='top-item'>AC: {equipment.armor.ac}</div>
       </div>
-      <Display  />
-      <Actions />
+      <Display />
+      <div id='action-bar' className='action-bar'>
+        <button className='action'>Attack</button>
+        <button className='action'>Use</button>
+        <button className='action'>Talk</button>
+        <button className='action'>Spell</button>
+      </div>
     </div>
   );
 }
+
+
 
 export default App;
 
