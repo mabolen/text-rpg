@@ -1,5 +1,6 @@
  import Display from './components/Display.js'
-import Actions from './components/Actions.js'
+import npcs from './components/Npcs.js';
+import rooms from './components/Rooms.js';
 import './App.css';
 import { useState } from 'react';
 
@@ -13,7 +14,7 @@ function App() {
   const [stam, setStam] = useState(10)
   const [points, setPoints] = useState(10)
   const [createChar, setCreateChar] = useState(true)
-  const [health, setHealth] = useState(stam * 5)
+  const [health, setHealth] = useState(50)
   const [room, setRoom] = useState('town square')
 
   const buttonFuncs = {
@@ -75,10 +76,21 @@ function App() {
     setCreateName(false)
   }
 
+  //handle finalize stats
+  const finalizeStats = () => {
+    setCreateChar(false)
+    setHealth(stam * 5)
+  }
+
+  //handle talk
+  const talk = () => {
+    alert("Nothing to say yet!")
+  }
+
   return (
     <div className="container-fluid" id='main'>
       <div id='char-sheet' className="char-sheet">
-        {points === 0 && createChar ? <button onClick={() => setCreateChar(false)}>Finalize Stats?</button> : null}
+        {points === 0 && createChar ? <button className='finalize-btn' onClick={() => finalizeStats()}>Finalize Stats?</button> : null}
         <ul className='stats'> Stats:
           {createChar ? <div>Points Remaining: {points}</div> : null}
           <li className='stat'>Strength: {str} 
@@ -114,7 +126,7 @@ function App() {
       <div id='action-bar' className='action-bar'>
         <button className='action'>Attack</button>
         <button className='action'>Use</button>
-        <button className='action'>Talk</button>
+        <button className='action' onClick={()=> talk()}>Talk</button>
         <button className='action'>Spell</button>
       </div>
     </div>

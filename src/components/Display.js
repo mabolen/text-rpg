@@ -14,11 +14,9 @@ const Display = (props) => {
 
   const currentRoom = rooms[zone][room]
   const currentNpcs = currentRoom.npcs
-  const npc = npcs[currentNpcs].description
-
-  console.log(currentNpcs)
+  let npc
+  currentNpcs ?  npc = npcs[currentNpcs].description : 
   console.log(npc)
-  console.log(npcs[currentNpcs].description)
 
   const directionCheck = {
     west: currentRoom.exits.west ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.west)}>West</div> : null,

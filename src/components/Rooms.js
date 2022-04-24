@@ -15,7 +15,10 @@ const rooms = {
             exits: {
                 east: 'town square',
                 north: 'house'
-            }
+            },
+            npcs: 'hobo',
+            talk: true,
+            speech: 'Some coin please?'
         },
         'house': {
             description: 'A small unoccupied home.',
@@ -27,7 +30,8 @@ const rooms = {
             description: 'A busy bar.',
             exits: {
                 south: 'town square'
-            }
+            },
+            npcs: 'soldier'
         },
         'shop': {
             description: 'You are in a shop.',

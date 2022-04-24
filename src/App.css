@@ -45,6 +45,8 @@
   height: 1.8rem;
   margin: 5px;
   vertical-align: middle;
+  background-color: var(--main-red);
+  color: var(--main-light);
 }
 
 .inventory {
@@ -59,7 +61,6 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0;
   margin-left: 20vw;
   height: 80vh;
   background-color: var(--main-red);
@@ -114,13 +115,15 @@
   background-color: var(--main-light);
   border: 1px solid black;
   border-radius: 5px;
-  box-shadow: 0 0 5px;
+  box-shadow: 0 0 2px;
   margin: 5px;
 }
 
 .action:hover {
   border: 2px solid var(--main-light);
   cursor: pointer;
+  background-color: var(--main-red);
+  color: var(--main-light);
 }
 
 .exit-title {
