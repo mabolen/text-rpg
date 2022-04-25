@@ -115,7 +115,7 @@ function App() {
   }
 
   return (
-    <div className="container-fluid" id='main'>
+    <div className="container" id='main'>
     {/* Stats sheet */}
       <div id='char-sheet' className="char-sheet">
         {points === 0 && createChar ? <button className='finalize-btn' onClick={() => finalizeStats()}>Finalize Stats?</button> : null}
@@ -144,15 +144,16 @@ function App() {
           <li className='eq'>Item: {equipment.item}</li>
         </ul>
       </div>
-      {/* Name/HP/AC bar */}
-      <div className='top-bar'>
-        {createName ? <form><input id='name-input' type="text" onChange={event => {currentName = event.target.value}}></input><button onClick={()=> submitName()}>Choose Name</button></form>: null}
-        {!createName ? <div className='top-item'>Name: {name}</div>: null}
-        <div className='top-item'>HP: {health}</div>
-        <div className='top-item'>AC: {equipment.armor.ac}</div>
-      </div>
+      
       {/* Primary Display */}
       <div id='display' className="display">
+        {/* Name/HP/AC bar */}
+        <div className='top-bar'>
+          {createName ? <form><input id='name-input' type="text" onChange={event => {currentName = event.target.value}}></input><button onClick={()=> submitName()}>Choose Name</button></form>: null}
+          {!createName ? <div className='top-item'>Name: {name}</div>: null}
+          <div className='top-item'>HP: {health}</div>
+          <div className='top-item'>AC: {equipment.armor.ac}</div>
+        </div>
         <div className='text-display'>
           {currentRoom.description}
         <div className='npcs'>
@@ -164,15 +165,16 @@ function App() {
         </div>
         {target ? <div> Target: {target}</div> : null}
         <div className='log'>{currentLog}</div>
-        <div id='action-bar' className='action-bar'>
+        
+      </div>
+      {/* Action bar */}
+      <div id='action-bar' className='action-bar'>
           <button className='action'>Attack</button>
           <button className='action'>Use</button>
           { currentNpcs && npc.speech ?<button className='action' onClick={()=>talk()}>Talk</button> : null}
           <button className='action'>Spell</button>
           {target ? <button className='action' onClick={()=> setTarget(null)}>Clear Target</button> : null}
         </div>
-      </div>
-      {/* Action bar */}
       </div>
       
     </div>
