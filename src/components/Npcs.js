@@ -1,41 +1,29 @@
 //import Mob from "./Mob"
 
 class Mob {
-    constructor(description, health, ac, attack) {
+    constructor(name, description, health, ac, attack, speech) {
+        
+        this.name = name
         this.description = description
         this.health = health
         this.ac = ac
         this.attack = attack
-    }
-
-    get damage() {
-        return this.attack()
-    }
-
-    attack() {
-        return Math.floor(Math.random(this.attack) + 1)
+        this.speech = speech
     }
 }
 
-// class Npc {
+class Npc {
 
-//     constructor(description, speech) {
-//         this.description = description
-//         this.speech = speech
-//     }
+    constructor(name, description, speech) {
+        this.name = name
+        this.description = description
+        this.speech = speech
+    }
+}
 
-//     get speech() {
-//         return this.speak()
-//     }
-
-//     speak() {
-//         return this.speech
-//     }
-// }
-
-const soldier = new Mob('A soldier is here drink heavily.', 20, 10, 6)
-const shadow = new Mob('A shadowy figure lurks about.', 100, 20, 12)
-const hobo = new Mob('A filthy deranged vagabond is sitting here.', 10, 5, 2)
+const soldier = new Mob('Soldier', 'A soldier is here drink heavily.', 20, 10, 6, '*BuuUuuUUrp* Leave me be!')
+const shadow = new Mob('Shadow', 'A shadowy figure lurks about.', 100, 20, 12, '...')
+const hobo = new Npc('Hobo', 'A filthy deranged vagabond is sitting here.', 'Could you spare some coin?')
 
 const npcs = {
     shadow: shadow,

@@ -15,7 +15,10 @@ function App() {
   const [points, setPoints] = useState(10)
   const [createChar, setCreateChar] = useState(true)
   const [health, setHealth] = useState(50)
-  const [room, setRoom] = useState('town square')
+  const [room, setRoom] = useState('creation')
+  const [zone, setZone] = useState('town')
+  const [target, setTarget] = useState(null)
+  const [currentLog, setCurrentLog] = useState('')
 
   const buttonFuncs = {
     incStr: function(){
@@ -52,6 +55,28 @@ function App() {
     },
   }
 
+  const moveRoom = (newRoom) => {
+    setRoom(newRoom)
+    setTarget('')
+    setCurrentLog('')
+  }
+
+  const currentRoom = rooms[zone][room]
+  const currentNpcs = currentRoom.npcs
+  let npc
+  currentNpcs ?  npc = npcs[currentNpcs]: 
+  console.log(npc)
+
+  const directionCheck = {
+    west: currentRoom.exits.west ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.west)}>West</div> : null,
+    east: currentRoom.exits.east ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.east)}>East</div> : null,
+    north: currentRoom.exits.north ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.north)}>North</div> : null,
+    south: currentRoom.exits.south ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.south)}>South</div> : null,
+    up: currentRoom.exits.up ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.up)}>Up</div> : null,
+    down: currentRoom.exits.down ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.down)}>Down</div> : null,
+    begin: currentRoom.exits.begin ? <div className='exit' onClick={()=> moveRoom(currentRoom.exits.begin)}>Begin</div> : null
+  }
+
   const dice = (num) => {
     Math.floor((Math.random() * num) + 1)
   }
@@ -81,14 +106,17 @@ function App() {
     setCreateChar(false)
     setHealth(stam * 5)
   }
-
+  
   //handle talk
   const talk = () => {
-    alert("Nothing to say yet!")
+    target && npc.speech == undefined ? setCurrentLog('They have nothing to say.') :
+    target ? setCurrentLog(`${target} says: ${npc.speech}`) : 
+    setCurrentLog('Who are you talking to?')
   }
 
   return (
     <div className="container-fluid" id='main'>
+    {/* Stats sheet */}
       <div id='char-sheet' className="char-sheet">
         {points === 0 && createChar ? <button className='finalize-btn' onClick={() => finalizeStats()}>Finalize Stats?</button> : null}
         <ul className='stats'> Stats:
@@ -116,19 +144,37 @@ function App() {
           <li className='eq'>Item: {equipment.item}</li>
         </ul>
       </div>
+      {/* Name/HP/AC bar */}
       <div className='top-bar'>
         {createName ? <form><input id='name-input' type="text" onChange={event => {currentName = event.target.value}}></input><button onClick={()=> submitName()}>Choose Name</button></form>: null}
         {!createName ? <div className='top-item'>Name: {name}</div>: null}
         <div className='top-item'>HP: {health}</div>
         <div className='top-item'>AC: {equipment.armor.ac}</div>
       </div>
-      <Display />
-      <div id='action-bar' className='action-bar'>
-        <button className='action'>Attack</button>
-        <button className='action'>Use</button>
-        <button className='action' onClick={()=> talk()}>Talk</button>
-        <button className='action'>Spell</button>
+      {/* Primary Display */}
+      <div id='display' className="display">
+        <div className='text-display'>
+          {currentRoom.description}
+        <div className='npcs'>
+          {currentNpcs ? <div className='npc'><a onClick={()=> {setTarget(npc.name)} }>{npc.name}</a>: {npc.description}</div> : null}
+        </div>
+        <div className='exit-title'>Exits:</div>
+        <div className='exits'>
+          {directionCheck.west}{directionCheck.east}{directionCheck.north}{directionCheck.south}{directionCheck.up}{directionCheck.down}{ !createChar && !createName ? directionCheck.begin : null}
+        </div>
+        {target ? <div> Target: {target}</div> : null}
+        <div className='log'>{currentLog}</div>
+        <div id='action-bar' className='action-bar'>
+          <button className='action'>Attack</button>
+          <button className='action'>Use</button>
+          { currentNpcs && npc.speech ?<button className='action' onClick={()=>talk()}>Talk</button> : null}
+          <button className='action'>Spell</button>
+          {target ? <button className='action' onClick={()=> setTarget(null)}>Clear Target</button> : null}
+        </div>
       </div>
+      {/* Action bar */}
+      </div>
+      
     </div>
   );
 }

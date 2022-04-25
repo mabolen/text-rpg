@@ -38,6 +38,7 @@ const Display = (props) => {
         <div className='exits'>
           {directionCheck.west}{directionCheck.east}{directionCheck.north}{directionCheck.south}{directionCheck.up}{directionCheck.down}
         </div>
+        <div className='log'>\\:</div>
       </div>
       
     </div>
